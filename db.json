@@ -1,0 +1,40 @@
+{
+  "dances": [
+    {
+      "id": 1,
+      "title": "Варненско",
+      "district": "Добруджанска област",
+      "learned": true
+    },
+    {
+      "id": 2,
+      "title": "Стъпил Добри",
+      "district": "Тракийска област",
+      "learned": true
+    },
+    {
+      "id": 3,
+      "title": "Айдар Аваси",
+      "district": "Пиринска област",
+      "learned": false
+    },
+    {
+      "id": 4,
+      "title": "Дуна",
+      "district": "Пиринска област",
+      "learned": false
+    },
+    {
+      "id": 5,
+      "title": "Дайчово",
+      "district": "Северняшка област",
+      "learned": true
+    },
+    {
+      "title": "Чичовото",
+      "district": "Северняшка област",
+      "learned": true,
+      "id": 6
+    }
+  ]
+}
