@@ -8,6 +8,6 @@ Uses <a href="https://www.npmjs.com/package/json-server" target="blank">json ser
 ```
 npm install
 npm run build
-npm run serve  // client
-serve -s dist  // server
+npm run serve    // client
+npm run backend  // server
 ```
