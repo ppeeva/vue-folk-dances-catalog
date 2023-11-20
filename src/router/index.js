@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import Home from "@/views/Home";
 import About from "@/views/About";
+import Update from "@/views/Update";
 
 const routes = [
   {
@@ -13,6 +14,14 @@ const routes = [
     path: "/about",
     name: "About",
     component: About,
+  },
+  {
+    path: `/update/:id`,
+    name: "Update",
+    component: Update,
+    props: route => ({ 
+      id: Number(route.params.id) || 0,
+    }),
   },
 ];
 

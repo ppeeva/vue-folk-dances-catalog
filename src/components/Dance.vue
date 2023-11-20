@@ -4,9 +4,13 @@
     :class="[dance.learned ? 'learned' : '', 'dance']"
   >
     <h3>
-      {{ dance.title }} <i @click="onDelete(dance.id)" class="fas fa-times"></i>
+      {{ dance.title }}
+      <i @click="$emit('delete-dance', dance.id)" class="fas fa-times"></i>
     </h3>
-    <p>{{ dance.district }}</p>
+    <p>
+      {{ dance.district }}
+      <i @click="goToUpdate(dance.id)" class="fa-solid fa-pencil"></i>
+    </p>
   </div>
 </template>
 
@@ -17,16 +21,20 @@ export default {
     dance: Object,
   },
   methods: {
-    onDelete(id) {
-      this.$emit("delete-dance", id);
+    goToUpdate(id) {
+      this.$router.push({ name: "Update", params: { id } });
     },
   },
 };
 </script>
 
 <style scoped>
-.fas {
+.fa-times {
   color: red;
+}
+
+.fa-pencil {
+  color: blue;
 }
 
 .dance {
@@ -40,7 +48,8 @@ export default {
   border-left: 5px solid green;
 }
 
-.dance h3 {
+.dance h3,
+p {
   display: flex;
   align-items: center;
   justify-content: space-between;

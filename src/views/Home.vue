@@ -10,6 +10,7 @@
 <script>
 import Dances from "@/components/Dances.vue";
 import AddDance from "@/components/AddDance.vue";
+import danceService from '@/services/dance.service'
 
 export default {
   name: "Home",
@@ -27,23 +28,12 @@ export default {
   },
   methods: {
     async addDance(dance) {
-      const result = await fetch("api/dances", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(dance),
-      });
-
-      const data = await result.json();
-
+      const data = await danceService.postDance(dance);
       this.dances = [...this.dances, data];
     },
     async deleteDance(id) {
       if (confirm("Are you sure?")) {
-        const result = await fetch(`api/dances/${id}`, {
-          method: "DELETE",
-        });
+        const result = await danceService.deleteDance(id);
 
         result.status === 200
           ? (this.dances = this.dances.filter((dance) => dance.id !== id))
@@ -51,39 +41,23 @@ export default {
       }
     },
     async toggleLearned(id) {
-      const danceToToggle = await this.fetchDance(id);
+      const danceToToggle = await danceService.fetchDance(id);
       const updateDance = {
         ...danceToToggle,
         learned: !danceToToggle.learned,
       };
 
-      const result = await fetch(`api/dances/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(updateDance),
-      });
-
-      const data = await result.json();
+      const data = await danceService.putDance(updateDance);
 
       this.dances = this.dances.map((dance) =>
         dance.id === id ? { ...dance, learned: data.learned } : dance
       );
     },
-    async fetchDances() {
-      const result = await fetch("api/dances");
-      const data = await result.json();
-      return data;
-    },
-    async fetchDance(id) {
-      const result = await fetch(`api/dances/${id}`);
-      const data = await result.json();
-      return data;
-    },
+    
   },
   async created() {
-    this.dances = await this.fetchDances();
+    this.dances = await danceService.fetchDances();
+    this.dances = this.dances.sort((a, b) => a.title.localeCompare(b.title));
   },
 };
 </script>
